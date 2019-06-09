@@ -6,17 +6,19 @@
     "electron-is-dev": "^1.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "zerorpc": "^0.9.8"
   },
   "description": "Highlight Translation",
   "main": "public/electron.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run electron",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http-get://localhost:3000 && electron .\"",
-    "electron": "electron ."
+    "electron": "concurrently --kill-others 'npm run start-react' 'npm run start-electron'",
+    "start-react": "BROWSER=none react-scripts start",
+    "start-electron": "wait-on http-get://localhost:3000 && electron . --debug"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,6 +39,7 @@
     "concurrently": "^4.1.0",
     "electron": "^5.0.3",
     "electron-builder": "^20.43.0",
+    "electron-rebuild": "^1.8.5",
     "wait-on": "^3.2.0"
   }
 }
