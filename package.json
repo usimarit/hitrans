@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "electron": "^5.0.3",
     "electron-is-dev": "^1.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -37,7 +38,6 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
-    "electron": "^5.0.3",
     "electron-builder": "^20.43.0",
     "electron-rebuild": "^1.8.5",
     "wait-on": "^3.2.0"
