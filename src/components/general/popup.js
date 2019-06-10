@@ -1,4 +1,4 @@
-import client from './py_connection';
+import client from '../zerorpc/py_connection';
 const BrowserWindow = window.electron.BrowserWindow;
 
 function popUp() {
