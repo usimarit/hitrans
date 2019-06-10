@@ -9,9 +9,10 @@ let MainWindow;
 
 function createWindow() {
   MainWindow = new BrowserWindow({
-    width: 900,
+    width: 1100,
     height: 680,
     title: 'Hitrans',
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
       preload: __dirname + '/preload.js',
