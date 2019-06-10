@@ -1,0 +1,36 @@
+@import './colors.css';
+
+.sidebar .title {
+  font-family: var(--font-family);
+  color: var(--sidebar-color);
+  text-align: right;
+  padding: 20px;
+}
+
+.sidebar .button-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  background-color: transparent;
+}
+
+.sidebar .button-list .button {
+  text-align: right;
+  color: var(--sidebar-color);
+  background-color: var(--sidebar-background-color);
+  border: none;
+  font-size: 11pt;
+  padding: 20px;
+  transition: all 200ms ease-in-out;
+}
+
+.sidebar .button-list .button:focus {
+  outline: none;
+}
+
+.sidebar .button-list .button:hover {
+  /*box-shadow: 0px 4px 5px -5px black;*/
+  background-color: var(--sidebar-button-hover) !important;
+  color: var(--sidebar-color) !important;
+}
