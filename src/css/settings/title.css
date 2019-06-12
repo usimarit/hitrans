@@ -1,0 +1,29 @@
+@import '../general/colors.css';
+
+.item .title {
+  background-color: var(--item-title-bgcolor);
+  color: var(--item-title-color);
+  padding: 0px;
+  margin: 0px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  transition: all 0.5s;
+}
+
+.item .title .text {
+  padding: 10px;
+  padding-left: 20px;
+  margin: 0px;
+  flex-grow: 1;
+  transition: 0.5s;
+}
+
+.item .title .button {
+  flex-grow: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: 0.5s;
+}
