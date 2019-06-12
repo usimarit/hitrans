@@ -5,6 +5,11 @@
   color: var(--sidebar-color);
   text-align: right;
   padding: 20px;
+  padding-top: 50px;
+}
+
+.sidebar .title h3 {
+  margin: 0;
 }
 
 .sidebar .button-list {
@@ -13,6 +18,7 @@
   align-items: stretch;
   justify-content: stretch;
   background-color: transparent;
+  flex-grow: 1;
 }
 
 .sidebar .button-list .button {
@@ -22,15 +28,56 @@
   border: none;
   font-size: 11pt;
   padding: 20px;
-  transition: all 200ms ease-in-out;
+  transition: all 0.5s;
 }
 
 .sidebar .button-list .button:focus {
   outline: none;
 }
 
-.sidebar .button-list .button:hover {
-  /*box-shadow: 0px 4px 5px -5px black;*/
+/*.sidebar .button-list .button:hover {
+  box-shadow: 0px 4px 5px -5px black;
   background-color: var(--sidebar-button-hover) !important;
   color: var(--sidebar-color) !important;
+}*/
+
+.sidebar .button-list .button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.sidebar .button-list .button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.sidebar .button-list .button:hover span {
+  padding-right: 25px;
+}
+
+.sidebar .button-list .button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.sidebar .authors {
+  padding: 20px;
+  text-align: right;
+  color: var(--sidebar-color);
+}
+
+.sidebar .authors h2,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar .authors p {
+  font-style: italic;
 }
