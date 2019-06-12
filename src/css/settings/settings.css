@@ -1,0 +1,18 @@
+.item .content .shortcut {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.item .content .languages {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: stretch;
+  justify-content: stretch;
+  flex-wrap: nowrap;
+}
+
+.item .content .languages .languages_item {
+  flex-grow: 1;
+  margin: 10px;
+}
