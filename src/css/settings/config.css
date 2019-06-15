@@ -1,0 +1,17 @@
+@import '../general/colors.css';
+
+.item .content .languages {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: stretch;
+  justify-content: stretch;
+  flex-wrap: nowrap;
+  color: var(--content_color);
+}
+
+.item .content .languages .languages_item {
+  flex-grow: 1;
+  margin: 10px;
+  width: 50%;
+}

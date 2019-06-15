@@ -3,7 +3,6 @@ import '../../css/general/app.css';
 import '../../css/general/sidebar.css';
 import { withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import Menu from '@material-ui/icons/Menu';
 
 const inactiveBgColor = 'transparent';
 const activeBgColor = '#01579B';
@@ -11,6 +10,8 @@ const inactiveFS = 'normal';
 const activeFS = 'italic';
 const inactiveColor = 'white';
 const activeColor = 'white';
+
+const MenuSlideShow = ['안녕', 'Hello', 'Hallo', 'Xin chào'];
 
 class Button extends React.Component {
   constructor(props) {
@@ -68,6 +69,31 @@ class Button extends React.Component {
 }
 
 class Sidebar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menu: MenuSlideShow[0],
+      count: 0,
+    };
+  }
+  componentWillMount = () => {
+    var intervalId = setInterval(this.slideshow, 2000);
+    this.setState({ intervalId: intervalId });
+  };
+  componentWillUnmount = () => {
+    clearInterval(this.state.intervalId);
+  };
+  slideshow = () => {
+    if (parseInt(this.state.count) === parseInt(MenuSlideShow.length - 1)) {
+      this.setState({ count: 0 }, () => {
+        this.setState({ menu: MenuSlideShow[this.state.count] });
+      });
+    } else {
+      this.setState({ count: this.state.count + 1 }, () => {
+        this.setState({ menu: MenuSlideShow[this.state.count] });
+      });
+    }
+  };
   renderButton = (item, index) => {
     return <Button history={this.props.history} key={index} item={item} />;
   };
@@ -76,7 +102,7 @@ class Sidebar extends React.Component {
       <div className="sidebar">
         <div className="title">
           <Typography variant="h3" gutterBottom>
-            안녕 !!!
+            {this.state.menu}
           </Typography>
         </div>
         <div className="button-list">
@@ -87,7 +113,7 @@ class Sidebar extends React.Component {
         <div className="authors">
           <h2>Developed by</h2>
           <p>Huy Le Nguyen</p>
-          <p>Anh Khoa Nguyen</p>
+          <p>Khoa Anh Nguyen</p>
         </div>
       </div>
     );
