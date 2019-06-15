@@ -70,24 +70,21 @@ class SettingScreen extends React.Component {
           </FormControl>
         </SettingItem>
         <SettingItem title="Shortcuts">
-          <FormControl component="fieldset">
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Button
-                    variant="contained"
-                    className="shortcut"
-                    disabled={this.state.is_pressing_keys}
-                    onClick={this.changeShortcut}
-                    color={this.state.is_current_shortcut ? 'primary' : null}>
-                    {this.state.current_shortcut}
-                  </Button>
-                }
-                label="Click to change keyboard shortcut"
-                labelPlacement="start"
-              />
-            </FormGroup>
-          </FormControl>
+          <FormControlLabel
+            className="shortcut"
+            control={
+              <Button
+                variant="contained"
+                className="shortcut_but"
+                disabled={this.state.is_pressing_keys}
+                onClick={this.changeShortcut}
+                color={this.state.is_current_shortcut ? 'primary' : null}>
+                {this.state.current_shortcut}
+              </Button>
+            }
+            label="Click to change keyboard shortcut"
+            labelPlacement="start"
+          />
         </SettingItem>
       </ScreenWrapper>
     );
