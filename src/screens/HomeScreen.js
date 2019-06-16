@@ -8,17 +8,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withGlobalContext } from '../components/context/global';
 
 class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      source_lang: false,
-      target_lang: false,
-      api_key: false,
-      model: false,
-      version: false,
-    };
-  }
   render() {
+    const conf = this.props.global.config.configurations;
     return (
       <ScreenWrapper>
         <div className="home">
@@ -49,29 +40,50 @@ class HomeScreen extends React.Component {
           <FormGroup className="status">
             <FormControlLabel
               control={
-                <Checkbox color="primary" checked={this.state.source_lang} />
+                <Checkbox
+                  color="primary"
+                  checked={conf && conf.source_lang ? true : false}
+                />
               }
               label="Source language"
             />
             <FormControlLabel
               control={
-                <Checkbox color="primary" checked={this.state.target_lang} />
+                <Checkbox
+                  color="primary"
+                  checked={conf && conf.target_lang ? true : false}
+                />
               }
               label="Target language"
             />
             <FormControlLabel
               control={
-                <Checkbox color="primary" checked={this.state.api_key} />
+                <Checkbox
+                  color="primary"
+                  checked={
+                    conf && conf.api_key && !conf.api_key.includes(' ')
+                      ? true
+                      : false
+                  }
+                />
               }
               label="Google API Key"
             />
             <FormControlLabel
-              control={<Checkbox color="primary" checked={this.state.model} />}
+              control={
+                <Checkbox
+                  color="primary"
+                  checked={conf && conf.model ? true : false}
+                />
+              }
               label="Google Translate API Model"
             />
             <FormControlLabel
               control={
-                <Checkbox color="primary" checked={this.state.version} />
+                <Checkbox
+                  color="primary"
+                  checked={conf && conf.version ? true : false}
+                />
               }
               label="Google Translate API Version"
             />
