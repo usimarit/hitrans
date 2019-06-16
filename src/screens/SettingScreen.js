@@ -7,20 +7,19 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import '../css/settings/settings.css';
+import { withGlobalContext } from '../components/context/global';
 
 class SettingScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      double_click: false, // Load settings
-      highlight: false, // Load settings
       is_current_shortcut: false, // Load settings
       current_shortcut: 'No value set',
       is_pressing_keys: false,
     };
   }
   selectionChanged = name => e => {
-    this.setState({ ...this.state, [name]: e.target.checked });
+    this.props.global.change_state('settings', name, e.target.checked);
   };
   checkExistingKeyComb = (key_comb, callback) => {
     callback();
@@ -47,21 +46,27 @@ class SettingScreen extends React.Component {
               <FormControlLabel
                 control={
                   <Checkbox
-                    value="double_click"
                     color="primary"
                     onChange={this.selectionChanged('double_click')}
-                    checked={this.state.double_click}
+                    checked={
+                      this.props.global.config.settings
+                        ? this.props.global.config.settings.double_click
+                        : false
+                    }
                   />
                 }
                 label="On double click"
               />
               <FormControlLabel
-                value="highlight"
                 control={
                   <Checkbox
                     color="primary"
-                    onChange={this.selectionChanged('highlight')}
-                    checked={this.state.highlight}
+                    onChange={this.selectionChanged('finished_selection')}
+                    checked={
+                      this.props.global.config.settings
+                        ? this.props.global.config.settings.finished_selection
+                        : false
+                    }
                   />
                 }
                 label="On finished selection"
@@ -71,6 +76,7 @@ class SettingScreen extends React.Component {
         </SettingItem>
         <SettingItem title="Shortcuts">
           <FormControlLabel
+            disabled
             className="shortcut"
             control={
               <Button
@@ -91,4 +97,4 @@ class SettingScreen extends React.Component {
   }
 }
 
-export default SettingScreen;
+export default withGlobalContext(SettingScreen);

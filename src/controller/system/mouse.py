@@ -1,5 +1,5 @@
-from Xlib import display
+# pylint: disable=missing-docstring, wrong-import-order
+import pymouse
 
-def get_mouse_coordinates():
-    data = display.Display().screen().root.query_pointer()._data
-    return data['root_x'], data['root_y']
+def get_mouse_coordinates_xorg():
+    return pymouse.PyMouse().position()
