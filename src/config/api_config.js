@@ -1,11 +1,38 @@
-const GAPI_VERSION = 'v2';
-
 const URL = 'https://translation.googleapis.com';
 
-const TRANS_URL = URL + '/language/translate/' + GAPI_VERSION;
+const TRANS_URL = URL + '/language/translate/';
 
-const API_KEY = '';
+export const lang = [
+  {
+    name: 'Auto detect languages',
+    value: 'auto',
+  },
+  {
+    name: 'English',
+    value: 'en',
+  },
+];
 
-const MODEL = 'nmt';
+export const engine = [
+  {
+    name: 'Neural Network',
+    value: 'nmt',
+  },
+  {
+    name: 'Base Line',
+    value: 'bl',
+  },
+];
 
-export default { URL, TRANS_URL, API_KEY, MODEL };
+export const version = [
+  {
+    name: 'Version  1',
+    value: 'v1',
+  },
+  {
+    name: 'Version 2',
+    value: 'v2',
+  },
+];
+
+export default { URL, TRANS_URL };

@@ -1,23 +1,38 @@
+# pylint: disable=missing-docstring, wrong-import-order
 import zerorpc
-import gevent, signal
-from mouse import get_mouse_coordinates
+import gevent
+import signal
+from mouse import get_mouse_coordinates_xorg
 from text_selection import get_selected_text
+from file import get_default_data, create_file, get_config, write_config
 
 class HitransPythonApi():
-    def getMousePosition(self):
-        return get_mouse_coordinates()
+    def get_mouse_position(self):
+        return get_mouse_coordinates_xorg()
 
-    def getSelectedText(self):
+    def get_selected_text(self):
         return get_selected_text()
 
+    def get_default_conf(self):
+        return get_default_data()
 
-port = 1234
-addr = 'tcp://127.0.0.1:' + str(port)
-s = zerorpc.Server(HitransPythonApi())
-s.bind(addr)
+    def create_file(self):
+        create_file()
+
+    def get_config(self):
+        return get_config()
+
+    def write_config(self, data):
+        write_config(data)
+
+
+PORT = 1234
+ADDR = 'tcp://127.0.0.1:' + str(PORT)
+S = zerorpc.Server(HitransPythonApi())
+S.bind(ADDR)
 
 print("Server running on port 1234")
-gevent.signal(signal.SIGTERM, s.stop)
-gevent.signal(signal.SIGINT, s.stop)  # ^C
+gevent.signal(signal.SIGTERM, S.stop)
+gevent.signal(signal.SIGINT, S.stop)  # ^C
 
-s.run()
+S.run()
