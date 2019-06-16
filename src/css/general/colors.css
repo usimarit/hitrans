@@ -4,4 +4,10 @@
   --sidebar-color: white;
   --screen-background-color: whitesmoke;
   --font-family: 'Roboto';
+  --shadow-color: grey;
+  --item-title-bgcolor: white;
+  --item-title-color: black;
+  --item-border-color: lightgrey;
+  --item-border-color-hover: grey;
+  --content-color: #444444;
 }

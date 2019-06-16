@@ -1,0 +1,13 @@
+@import '../general/colors.css';
+
+.item .content {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  color: var(--content-color);
+}

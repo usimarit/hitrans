@@ -1,0 +1,24 @@
+@import '../general/colors.css';
+
+.item {
+  position: relative;
+  width: 95%;
+  border: 1px solid var(--item-border-color);
+  border-radius: 4px;
+  margin-top: 20px;
+  box-shadow: 0px 4px 5px -5px black;
+  overflow: hidden;
+  transition: all 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+/*.item:hover {
+  border-color: var(--item-border-color-hover);
+}*/
+
+.hidden {
+  transition: ease-in-out;
+}

@@ -1,0 +1,12 @@
+.item .content .shortcut {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+}
+
+.item .content .shortcut .shortcut_but {
+  margin-left: 20px;
+  margin-right: 20px;
+}
