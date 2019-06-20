@@ -1,0 +1,31 @@
+html,
+body {
+  font-family: 'Roboto';
+  word-wrap: break-word;
+  background-color: whitesmoke;
+  margin: 0;
+}
+
+.container_popup {
+  margin: 0px;
+  padding: 0;
+}
+.container_popup p {
+  margin: 5px;
+  padding: 20px;
+  padding-top: 10px;
+}
+
+.container_popup h3 {
+  margin: 0;
+  padding: 20px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  background-color: #0288d1;
+  color: white;
+  font-weight: 600;
+}
+
+.container_popup .popup_detail {
+  margin-bottom: 10px;
+}

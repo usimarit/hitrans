@@ -4,23 +4,27 @@ const TRANS_URL = URL + '/language/translate/';
 
 export const lang = [
   {
-    name: 'Auto detect languages',
+    name: 'Auto detect language',
     value: 'auto',
   },
   {
     name: 'English',
     value: 'en',
   },
+  {
+    name: 'Vietnamese',
+    value: 'vi',
+  },
 ];
 
 export const engine = [
   {
-    name: 'Neural Network',
+    name: 'Neural Machine Translation',
     value: 'nmt',
   },
   {
-    name: 'Base Line',
-    value: 'bl',
+    name: 'Phrase-Based Machine Translation ',
+    value: 'pbmt',
   },
 ];
 

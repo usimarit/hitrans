@@ -3,6 +3,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Tray = electron.Tray;
 const Menu = electron.Menu;
+const ipc = electron.ipcMain;
 
 const path = require('path');
 const isDev = require('electron-is-dev');
@@ -20,7 +21,7 @@ function createWindow() {
     autoHideMenuBar: true,
     icon: icon_path,
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: true,
       preload: __dirname + '/preload.js',
     },
   });
