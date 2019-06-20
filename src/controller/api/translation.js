@@ -1,21 +1,22 @@
 import api_config from '../../config/api_config';
 import makeRequest from './api';
 
-export const translate = (q, target, source, format) => {
+const translate = (q, config) => {
   let url =
     api_config.TRANS_URL +
     '?q=' +
     q +
     '&target=' +
-    target +
-    '&source=' +
-    source +
+    config.target_lang +
     '&format=' +
-    format +
+    config.format +
     '&model=' +
-    api_config.MODEL +
+    config.model +
     '&key=' +
-    api_config.API_KEY;
+    config.api_key;
+  if (config.source_lang !== 'auto') {
+    url += '&source=' + config.source_lang;
+  }
   return makeRequest(url, {
     method: 'POST',
   })
@@ -28,3 +29,5 @@ export const translate = (q, target, source, format) => {
       console.error(e);
     });
 };
+
+export default translate;

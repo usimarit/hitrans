@@ -1,10 +1,12 @@
 import client from '../../controller/monitor/py_connection';
+import translate from '../../controller/api/translation';
+import { lookup_lang } from '../../config/api_config';
 const BrowserWindow = window.electron.BrowserWindow;
 
 const _width = 400;
 const _height = 250;
 
-function popUp(source_lang, text, target_lang, translated_text) {
+function popUp(text, config) {
   let x, y;
   client.invoke('get_mouse_position', (error, result) => {
     if (error) {
@@ -35,11 +37,13 @@ function popUp(source_lang, text, target_lang, translated_text) {
       console.log(arg);
     });
     framelessWin.webContents.on('did-finish-load', () => {
-      framelessWin.webContents.send('async-show-trans', {
-        target_lang: target_lang,
-        translated_text: translated_text,
-        source_lang: source_lang,
-        text: text,
+      translate(text, config).then(res => {
+        framelessWin.webContents.send('async-show-trans', {
+          target_lang: lookup_lang[config.target_lang],
+          translated_text: res,
+          source_lang: lookup_lang[config.source_lang],
+          text: text,
+        });
       });
     });
     framelessWin.setMenuBarVisibility(false);

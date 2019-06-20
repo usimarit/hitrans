@@ -17,6 +17,14 @@ export const lang = [
   },
 ];
 
+export const lookup_lang = {
+  auto: 'Auto detect language',
+  en: 'English',
+  vi: 'Vietnamese',
+  fr: 'French',
+  kr: 'Korean',
+};
+
 export const engine = [
   {
     name: 'Neural Machine Translation',

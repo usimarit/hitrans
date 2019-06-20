@@ -91,9 +91,10 @@ class HomeScreen extends React.Component {
           </FormGroup>
           <button
             onClick={() => {
-              popUp('English', 'Hello', 'Vietnamese', 'Xin chao');
-            }}
-          />
+              popUp('Hello', this.props.global.config.configurations);
+            }}>
+            Test
+          </button>
         </div>
       </ScreenWrapper>
     );
