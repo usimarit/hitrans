@@ -20,9 +20,9 @@ export const lang = [
 export const lookup_lang = {
   auto: 'Auto detect language',
   en: 'English',
-  vi: 'Vietnamese',
+  vi: 'Tiếng Việt',
   fr: 'French',
-  kr: 'Korean',
+  kr: '한국어',
 };
 
 export const engine = [

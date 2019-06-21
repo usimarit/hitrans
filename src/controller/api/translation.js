@@ -2,14 +2,16 @@ import api_config from '../../config/api_config';
 import makeRequest from './api';
 
 const translate = (q, config) => {
+  let format = config.format ? config.format : 'text';
   let url =
     api_config.TRANS_URL +
+    config.version +
     '?q=' +
     q +
     '&target=' +
     config.target_lang +
     '&format=' +
-    config.format +
+    format +
     '&model=' +
     config.model +
     '&key=' +

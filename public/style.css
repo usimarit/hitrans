@@ -3,7 +3,6 @@ body {
   font-family: 'Roboto';
   word-wrap: break-word;
   background-color: whitesmoke;
-  margin: 0;
 }
 
 .container_popup {
@@ -11,19 +10,18 @@ body {
   padding: 0;
 }
 .container_popup p {
-  margin: 5px;
-  padding: 20px;
-  padding-top: 10px;
+  margin: 0px;
+  padding: 10px;
+  padding-top: 0px;
+  font-size: 16pt;
 }
 
-.container_popup h3 {
+.container_popup h5 {
   margin: 0;
-  padding: 20px;
+  padding: 10px;
   padding-bottom: 5px;
   padding-top: 5px;
-  background-color: #0288d1;
-  color: white;
-  font-weight: 600;
+  color: grey;
 }
 
 .container_popup .popup_detail {

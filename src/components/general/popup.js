@@ -4,7 +4,7 @@ import { lookup_lang } from '../../config/api_config';
 const BrowserWindow = window.electron.BrowserWindow;
 
 const _width = 400;
-const _height = 250;
+const _height = 180;
 
 function popUp(text, config) {
   let x, y;
@@ -33,9 +33,6 @@ function popUp(text, config) {
     });
 
     framelessWin.loadFile('public/popup.html');
-    framelessWin.webContents.on('set-height', (event, arg) => {
-      console.log(arg);
-    });
     framelessWin.webContents.on('did-finish-load', () => {
       translate(text, config).then(res => {
         framelessWin.webContents.send('async-show-trans', {

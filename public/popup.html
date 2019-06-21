@@ -10,14 +10,14 @@
     <title>Translation</title>
   </head>
   <body>
-    <div class="container_popup">
+    <div class="container_popup" id="container">
       <div class="popup_detail">
-        <h3 id="source_lang">Source Language</h3>
-        <p id="text">Text</p>
+        <h5 id="source_lang"></h5>
+        <p id="text"></p>
       </div>
       <div class="popup_detail">
-        <h3 id="target_lang">Target Language</h3>
-        <p id="translated_text">Translated Text</p>
+        <h5 id="target_lang"></h5>
+        <p id="translated_text"></p>
       </div>
     </div>
     <script>
@@ -32,7 +32,6 @@
         source_lang.innerHTML = arg.source_lang;
         text.innerHTML = arg.text;
       });
-      ipc.send('set-height', document.body.scrollHeight);
     </script>
   </body>
 </html>
