@@ -1,12 +1,11 @@
-import React from 'react';
-import ScreenWrapper from '../components/general/ScreenWrapper';
-import '../css/general/home.css';
-import Typography from '@material-ui/core/Typography';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { withGlobalContext } from '../components/context/global';
-import popUp from '../components/general/popup';
+import React from "react";
+import ScreenWrapper from "../components/general/ScreenWrapper";
+import "../css/general/home.css";
+import Typography from "@material-ui/core/Typography";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { withGlobalContext } from "../components/context/global";
 
 class HomeScreen extends React.Component {
   render() {
@@ -62,7 +61,7 @@ class HomeScreen extends React.Component {
                 <Checkbox
                   color="primary"
                   checked={
-                    conf && conf.api_key && !conf.api_key.includes(' ')
+                    conf && conf.api_key && !conf.api_key.includes(" ")
                       ? true
                       : false
                   }
@@ -89,12 +88,6 @@ class HomeScreen extends React.Component {
               label="Google Translate API Version"
             />
           </FormGroup>
-          <button
-            onClick={() => {
-              popUp('Hello', this.props.global.config.configurations);
-            }}>
-            Test
-          </button>
         </div>
       </ScreenWrapper>
     );

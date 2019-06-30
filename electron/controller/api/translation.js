@@ -1,26 +1,25 @@
-import api_config from '../../config/api_config';
-import makeRequest from './api';
+const makeRequest = require("./api");
 
 const translate = (q, config) => {
-  let format = config.format ? config.format : 'text';
+  let format = config.format ? config.format : "text";
   let url =
-    api_config.TRANS_URL +
+    config.trans_url +
     config.version +
-    '?q=' +
+    "?q=" +
     q +
-    '&target=' +
+    "&target=" +
     config.target_lang +
-    '&format=' +
+    "&format=" +
     format +
-    '&model=' +
+    "&model=" +
     config.model +
-    '&key=' +
+    "&key=" +
     config.api_key;
-  if (config.source_lang !== 'auto') {
-    url += '&source=' + config.source_lang;
+  if (config.source_lang !== "auto") {
+    url += "&source=" + config.source_lang;
   }
   return makeRequest(url, {
-    method: 'POST',
+    method: "POST"
   })
     .then(res => {
       if (res.data) {
@@ -32,4 +31,4 @@ const translate = (q, config) => {
     });
 };
 
-export default translate;
+module.exports = translate;
