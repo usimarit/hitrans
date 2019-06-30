@@ -13,6 +13,7 @@ export default class GlobalContextProvider extends React.Component {
       source_lang: [],
       target_lang: [],
       engine: [],
+      version: [],
       lookup_lang: {}
     };
   }
@@ -21,6 +22,7 @@ export default class GlobalContextProvider extends React.Component {
     ipcRenderer.send("create-config-file");
     ipcRenderer.on("create-config-file-reply", (event, arg) => {
       let data = JSON.parse(arg);
+      console.log(data);
       this.setState({ config: data });
     });
     ipcRenderer.on("write-config-file-reply", (event, arg) => {
@@ -37,13 +39,18 @@ export default class GlobalContextProvider extends React.Component {
         source_lang: data.lang,
         target_lang: data.lang.slice(1, data.lang.length),
         engine: data.engine,
-        lookup_lang: data.lookup_lang
+        lookup_lang: data.lookup_lang,
+        version: data.version
       });
     });
   };
 
   componentDidMount = () => {
     this.setState({ loading: false });
+  };
+
+  componentWillUnmount = () => {
+    ipcRenderer.removeAllListeners();
   };
 
   change_state = (option, name, data) => {
@@ -55,7 +62,7 @@ export default class GlobalContextProvider extends React.Component {
   };
 
   store_configurations = () => {
-    ipcRenderer.send("write-config-file", this.state.config);
+    ipcRenderer.send("write-config-file", JSON.stringify(this.state.config));
   };
 
   get_configurations = () => {

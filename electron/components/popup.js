@@ -8,8 +8,11 @@ ipcRenderer.on("async-show-trans", (event, arg) => {
   translated_text.innerHTML = arg.translated_text;
   source_lang.innerHTML = arg.source_lang;
   text.innerHTML = arg.text;
-  ipcRenderer.send("async-show-trans-reply", {
-    width: window.innerWidth,
-    height: window.innerHeight
-  });
+  ipcRenderer.send(
+    "async-show-trans-reply",
+    JSON.stringify({
+      width: window.innerWidth,
+      height: window.innerHeight
+    })
+  );
 });

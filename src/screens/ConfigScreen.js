@@ -70,7 +70,11 @@ class ConfigScreen extends React.Component {
                 }}
               >
                 {this.props.global.target_lang.map((item, index) => {
-                  return <MenuItem value={item.value}>{item.name}</MenuItem>;
+                  return (
+                    <MenuItem key={index} value={item.value}>
+                      {item.name}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>

@@ -1,4 +1,4 @@
-@import './colors.css';
+@import "./colors.css";
 
 .body {
   display: flex;
@@ -42,5 +42,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
 }

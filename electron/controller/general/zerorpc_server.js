@@ -3,7 +3,14 @@ const ipcRenderer = require("electron").ipcRenderer;
 
 var server = new zerorpc.Server({
   popUp: function(text, x, y) {
-    ipcRenderer.send("popup", text, x, y);
+    ipcRenderer.send(
+      "popup",
+      JSON.stringify({
+        text: text,
+        x: x,
+        y: y
+      })
+    );
   }
 });
 

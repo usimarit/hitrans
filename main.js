@@ -77,7 +77,7 @@ function popUp(text, x, y) {
     resizable: false,
     useContentSize: true,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: false
     }
   });
 
@@ -123,7 +123,7 @@ ipcMain.on("create-config-file", (event, arg) => {
       console.error(error);
     }
     file.get_config(data => {
-      event.reply("create-config-file-reply", data);
+      event.reply("create-config-file-reply", JSON.stringify(data));
     });
   });
 });
@@ -137,15 +137,18 @@ ipcMain.on("write-config-file", (event, arg) => {
 
 ipcMain.on("get-config-file", (event, arg) => {
   file.get_config(data => {
-    event.reply("get-config-file-reply", data);
+    event.reply("get-config-file-reply", JSON.stringify(data));
   });
 });
 
 ipcMain.on("get-google-translate-config", (event, arg) => {
-  event.reply("get-google-translate-config-reply", {
-    lang: google_translation.lang,
-    engine: google_translation.engine,
-    version: google_translation.version,
-    lookup_lang: google_translation.lookup_lang
-  });
+  event.reply(
+    "get-google-translate-config-reply",
+    JSON.stringify({
+      lang: google_translation.lang,
+      engine: google_translation.engine,
+      version: google_translation.version,
+      lookup_lang: google_translation.lookup_lang
+    })
+  );
 });
