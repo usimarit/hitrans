@@ -1,5 +1,6 @@
 {
   "configurations": {
+    "trans_url": "https://translation.googleapis.com/language/translate/",
     "source_lang": "auto",
     "target_lang": "en",
     "api_key": "This is Google API Key",

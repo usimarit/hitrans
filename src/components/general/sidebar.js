@@ -1,17 +1,15 @@
-import React from 'react';
-import '../../css/general/app.css';
-import '../../css/general/sidebar.css';
-import { withRouter } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import "../../css/general/app.css";
+import "../../css/general/sidebar.css";
+import { withRouter } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
-const inactiveBgColor = 'transparent';
-const activeBgColor = '#01579B';
-const inactiveFS = 'normal';
-const activeFS = 'italic';
-const inactiveColor = 'white';
-const activeColor = 'white';
-
-const MenuSlideShow = ['안녕', 'Hello', 'Hallo', 'Xin chào'];
+const inactiveBgColor = "transparent";
+const activeBgColor = "#01579B";
+const inactiveFS = "normal";
+const activeFS = "italic";
+const inactiveColor = "white";
+const activeColor = "white";
 
 class Button extends React.Component {
   constructor(props) {
@@ -19,7 +17,7 @@ class Button extends React.Component {
     this.state = {
       bgColor: inactiveBgColor,
       fontStyle: inactiveFS,
-      color: inactiveColor,
+      color: inactiveColor
     };
 
     this.props.history.listen(location => {
@@ -39,14 +37,14 @@ class Button extends React.Component {
     this.setState({
       bgColor: inactiveBgColor,
       fontStyle: inactiveFS,
-      color: inactiveColor,
+      color: inactiveColor
     });
   };
   setActive = () => {
     this.setState({
       bgColor: activeBgColor,
       fontStyle: activeFS,
-      color: activeColor,
+      color: activeColor
     });
   };
   handleClick = () => {
@@ -59,9 +57,10 @@ class Button extends React.Component {
         style={{
           backgroundColor: this.state.bgColor,
           fontStyle: this.state.fontStyle,
-          color: this.state.color,
+          color: this.state.color
         }}
-        onClick={this.handleClick}>
+        onClick={this.handleClick}
+      >
         <span>{this.props.item.name}</span>
       </button>
     );
@@ -69,31 +68,6 @@ class Button extends React.Component {
 }
 
 class Sidebar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menu: MenuSlideShow[0],
-      count: 0,
-    };
-  }
-  componentWillMount = () => {
-    var intervalId = setInterval(this.slideshow, 2000);
-    this.setState({ intervalId: intervalId });
-  };
-  componentWillUnmount = () => {
-    clearInterval(this.state.intervalId);
-  };
-  slideshow = () => {
-    if (parseInt(this.state.count) === parseInt(MenuSlideShow.length - 1)) {
-      this.setState({ count: 0 }, () => {
-        this.setState({ menu: MenuSlideShow[this.state.count] });
-      });
-    } else {
-      this.setState({ count: this.state.count + 1 }, () => {
-        this.setState({ menu: MenuSlideShow[this.state.count] });
-      });
-    }
-  };
   renderButton = (item, index) => {
     return <Button history={this.props.history} key={index} item={item} />;
   };
@@ -102,7 +76,7 @@ class Sidebar extends React.Component {
       <div className="sidebar">
         <div className="title">
           <Typography variant="h3" gutterBottom>
-            {this.state.menu}
+            Hello
           </Typography>
         </div>
         <div className="button-list">
