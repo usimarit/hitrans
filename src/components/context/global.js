@@ -1,7 +1,7 @@
 import React from "react";
 import Loading from "../../components/general/loading";
 
-const ipcRenderer = window.require("electron").ipcRenderer;
+const ipcRenderer = window.electron.ipcRenderer;
 const globalContext = React.createContext();
 
 export default class GlobalContextProvider extends React.Component {

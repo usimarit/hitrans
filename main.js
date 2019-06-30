@@ -11,11 +11,16 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 
 let MainWindow = null;
+let server = null;
 let framelessWin = null;
 let tray = null;
 
 const icon_path = path.join(__dirname, "/electron/assets/images/translate.png");
 const popup_html = path.join(__dirname, "/electron/assets/html/popup.html");
+const background_html = path.join(
+  __dirname,
+  "/electron/assets/html/background.html"
+);
 
 function createWindow() {
   MainWindow = new BrowserWindow({
@@ -25,7 +30,8 @@ function createWindow() {
     autoHideMenuBar: true,
     icon: icon_path,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      preload: __dirname + "/electron/preload.js"
     }
   });
   MainWindow.loadURL(
@@ -77,7 +83,7 @@ function popUp(text, x, y) {
     resizable: false,
     useContentSize: true,
     webPreferences: {
-      nodeIntegration: false
+      nodeIntegration: true
     }
   });
 
@@ -97,58 +103,70 @@ function popUp(text, x, y) {
   framelessWin.show();
 }
 
-app.on("ready", createWindow);
+function createServer() {
+  server = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true
+    },
+    show: false
+  });
+  server.loadFile(background_html);
+}
+
+app.on("ready", () => {
+  createWindow();
+  createServer();
+
+  ipcMain.on("popup", (event, arg) => {
+    let data = JSON.parse(arg);
+    popUp(data.text, data.x, data.y);
+  });
+
+  ipcMain.on("async-show-trans-reply", (event, arg) => {
+    arg = JSON.parse(arg);
+    framelessWin.setSize(arg.width, arg.height);
+    console.log("New size: " + arg.width + ", " + arg.height);
+  });
+
+  ipcMain.on("create-config-file", (event, arg) => {
+    file.create_config_file(error => {
+      if (error) {
+        console.error(error);
+      }
+      file.get_config(data => {
+        event.reply("create-config-file-reply", JSON.stringify(data));
+      });
+    });
+  });
+
+  ipcMain.on("write-config-file", (event, arg) => {
+    let data = JSON.parse(arg);
+    file.write_config(data, message => {
+      event.reply("write-config-file-reply", message);
+    });
+  });
+
+  ipcMain.on("get-config-file", (event, arg) => {
+    file.get_config(data => {
+      event.reply("get-config-file-reply", JSON.stringify(data));
+    });
+  });
+
+  ipcMain.on("get-google-translate-config", (event, arg) => {
+    event.reply(
+      "get-google-translate-config-reply",
+      JSON.stringify({
+        lang: google_translation.lang,
+        engine: google_translation.engine,
+        version: google_translation.version,
+        lookup_lang: google_translation.lookup_lang
+      })
+    );
+  });
+});
 
 app.on("activate", () => {
   if (MainWindow === null) {
     createWindow();
   }
-});
-
-ipcMain.on("popup", (event, arg) => {
-  arg = JSON.parse(arg);
-  popUp(arg.text, arg.x, arg.y);
-  console.log("Pop up arg: " + arg);
-});
-
-ipcMain.on("async-show-trans-reply", (event, arg) => {
-  arg = JSON.parse(arg);
-  framelessWin.setSize(arg.width, arg.height);
-  console.log("New size: " + arg.width + ", " + arg.height);
-});
-
-ipcMain.on("create-config-file", (event, arg) => {
-  file.create_config_file(error => {
-    if (error) {
-      console.error(error);
-    }
-    file.get_config(data => {
-      event.reply("create-config-file-reply", JSON.stringify(data));
-    });
-  });
-});
-
-ipcMain.on("write-config-file", (event, arg) => {
-  let data = JSON.parse(arg);
-  file.write_config(data, message => {
-    event.reply("write-config-file-reply", message);
-  });
-});
-
-ipcMain.on("get-config-file", (event, arg) => {
-  file.get_config(data => {
-    event.reply("get-config-file-reply", JSON.stringify(data));
-  });
-});
-
-ipcMain.on("get-google-translate-config", (event, arg) => {
-  event.reply(
-    "get-google-translate-config-reply",
-    JSON.stringify({
-      lang: google_translation.lang,
-      engine: google_translation.engine,
-      version: google_translation.version,
-      lookup_lang: google_translation.lookup_lang
-    })
-  );
 });

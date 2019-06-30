@@ -1,0 +1,3 @@
+HOST = 'tcp://0.0.0.0:'
+SVR_ADDR = HOST + '1234'
+CLT_ADDR = HOST + '1235'
