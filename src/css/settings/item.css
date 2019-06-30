@@ -3,10 +3,10 @@
 .item {
   position: relative;
   width: 95%;
-  border: 1px solid var(--item-border-color);
+  /*border: 1px solid var(--item-border-color);*/
   border-radius: 4px;
   margin-top: 20px;
-  box-shadow: 0px 4px 5px -5px black;
+  box-shadow: 0px 2px 5px -2px black;
   overflow: hidden;
   transition: all 0.5s;
   display: flex;
@@ -15,9 +15,9 @@
   align-items: stretch;
 }
 
-/*.item:hover {
-  border-color: var(--item-border-color-hover);
-}*/
+.item:hover {
+  box-shadow: 0px 2px 10px -2px dimgray;
+}
 
 .hidden {
   transition: ease-in-out;
