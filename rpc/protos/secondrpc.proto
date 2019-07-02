@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package secondrpc;
+
+service SecondRpc {
+  rpc PopUp(PopData) returns (Empty) {}
+}
+
+message Empty {}
+
+message PopData {
+  string text = 1;
+  int32 x = 2;
+  int32 y = 3;
+}
