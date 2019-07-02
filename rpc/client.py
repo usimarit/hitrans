@@ -1,8 +1,7 @@
+# pylint: disable=missing-docstring, wrong-import-order, invalid-name
 from pynput import mouse
 import grpc
 from text_selection import get_selected_text
-from config import CLT_ADDR
-import time
 
 import hitrans_client_pb2
 import hitrans_client_pb2_grpc
@@ -15,7 +14,7 @@ def client():
         def on_click(x, y, button, pressed):
             if not pressed:
                 text = get_selected_text()
-                if (text == ''):
+                if text == '':
                     return
                 print(text)
                 stub.PopUp(hitrans_client_pb2.PopData(

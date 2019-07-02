@@ -1,8 +1,7 @@
 # pylint: disable=missing-docstring, wrong-import-order
 
 import grpc
-from file import get_default_data, create_file, get_config, write_config
-from config import SVR_ADDR
+from file import create_file, get_config, write_config
 
 from concurrent import futures
 import hitrans_pb2_grpc
