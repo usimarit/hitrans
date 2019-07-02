@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package hitrans;
+package firstrpc;
 
-service Hitrans {
+service FirstRpc {
   rpc CreateConfigFile(Empty) returns (Empty) {}
   rpc GetConfigFile(Empty) returns (ConfigData) {}
   rpc WriteConfigFile(ConfigData) returns (Empty) {}

@@ -4,18 +4,18 @@ import grpc
 from file import create_file, get_config, write_config
 
 from concurrent import futures
-import hitrans_pb2_grpc
-import hitrans_pb2
+import firstrpc_pb2_grpc
+import firstrpc_pb2
 
 
-class HitransServicer(hitrans_pb2_grpc.HitransServicer):
+class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
     def CreateConfigFile(self, request, context):
         create_file()
-        return hitrans_pb2.Empty()
+        return firstrpc_pb2.Empty()
 
     def GetConfigFile(self, request, context):
         data = get_config()
-        conf = hitrans_pb2.Configurations(
+        conf = firstrpc_pb2.Configurations(
             trans_url=data.configurations.trans_url,
             source_lang=data.configurations.source_lang,
             target_lang=data.configurations.target_lang,
@@ -23,15 +23,15 @@ class HitransServicer(hitrans_pb2_grpc.HitransServicer):
             model=data.configurations.model,
             version=data.configurations.version
         )
-        text_sel = hitrans_pb2.TextSelection(
+        text_sel = firstrpc_pb2.TextSelection(
             double_click=data.settings.text_selection.double_click,
             finished_selection=data.settings.text_selection.finished_selection
         )
-        sets = hitrans_pb2.Settings(
+        sets = firstrpc_pb2.Settings(
             text_selection=text_sel,
             shortcut=data.settings.shortcuts
         )
-        return hitrans_pb2.ConfigData(
+        return firstrpc_pb2.ConfigData(
             conf=conf,
             set=sets
         )
@@ -55,12 +55,12 @@ class HitransServicer(hitrans_pb2_grpc.HitransServicer):
             }
         })
         write_config(data)
-        return hitrans_pb2.Empty()
+        return firstrpc_pb2.Empty()
 
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    hitrans_pb2_grpc.add_HitransServicer_to_server(
+    firstrpc_pb2_grpc.add_FirstRpcServicer_to_server(
         HitransServicer(), server
     )
     server.add_insecure_port('[::]:1234')

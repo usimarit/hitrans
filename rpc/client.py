@@ -3,13 +3,13 @@ from pynput import mouse
 import grpc
 from text_selection import get_selected_text
 
-import hitrans_client_pb2
-import hitrans_client_pb2_grpc
+import secondrpc_pb2
+import secondrpc_pb2_grpc
 
 
 def client():
     with grpc.insecure_channel('localhost:1235') as channel:
-        stub = hitrans_client_pb2_grpc.Hitrans_ClientStub(channel)
+        stub = secondrpc_pb2_grpc.SecondRpcStub(channel)
 
         def on_click(x, y, button, pressed):
             if not pressed:
@@ -17,7 +17,7 @@ def client():
                 if text == '':
                     return
                 print(text)
-                stub.PopUp(hitrans_client_pb2.PopData(
+                stub.PopUp(secondrpc_pb2.PopData(
                     text=text,
                     x=x,
                     y=y
