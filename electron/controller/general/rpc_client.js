@@ -16,7 +16,11 @@ var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   defaults: true,
   oneofs: true,
 });
+var client_proto = grpc.loadPackageDefinition(packageDefinition).firstrpc;
 
-function client() {}
+var client = new client_proto.FirstRpc(
+  'localhost:1234',
+  grpc.credentials.createInsecure(),
+);
 
 module.exports = client;

@@ -1,44 +1,31 @@
-const client = require("./zerorpc_client");
+const client = require('./rpc_client');
 
 const create_config_file = callback => {
-  client.invoke("create_file", error => {
-    if (callback) {
-      callback(error);
-    }
-  });
-};
-
-const get_default_config = callback => {
-  client.invoke("get_default_conf", (error, res) => {
-    if (error) {
-      console.error(error);
-      callback({});
+  client.CreateConfigFile((err, response) => {
+    if (err) {
+      console.error(err);
     } else {
-      callback(res);
+      callback(response.message);
     }
   });
 };
 
 const get_config = callback => {
-  client.invoke("get_config", (error, res) => {
-    if (error) {
-      console.error(error);
-      get_default_config(callback);
+  client.GetConfigFile((err, response) => {
+    if (err) {
+      console.error(err);
     } else {
-      callback(res);
+      callback(response.message);
     }
   });
 };
 
 const write_config = (data, callback) => {
-  client.invoke("write_config", data, error => {
-    if (error) {
-      console.error(error);
-      callback(error);
+  client.WriteConfigFile(data, (err, response) => {
+    if (err) {
+      console.error(err);
     } else {
-      if (callback) {
-        callback("Successfully");
-      }
+      callback(response.message);
     }
   });
 };
