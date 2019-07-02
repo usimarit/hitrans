@@ -31,10 +31,24 @@ var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   defaults: true,
   oneofs: true,
 });
-var server_proto = grpc.loadPackageDefinition(packageDefinition).rpc_server;
+var server_proto = grpc.loadPackageDefinition(packageDefinition).secondrpc;
 
-function PopUp(call, callback) {
-  callback(null);
+function PopUp(call) {
+  ipcRenderer.send(
+    'popup',
+    JSON.stringify({
+      text: call.request.text,
+      x: call.request.x,
+      y: call.request.y,
+    }),
+  );
 }
 
-function main() {}
+function main() {
+  var server = new grpc.Server();
+  server.addService(server_proto.SecondRpc.service, { PopUp: PopUp });
+  server.bind('0.0.0.0:1235', grpc.ServerCredentials.createInsecure());
+  server.start();
+}
+
+main();
