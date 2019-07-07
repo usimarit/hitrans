@@ -30,6 +30,6 @@ message Settings {
 }
 
 message ConfigData {
-  Configurations conf = 1;
-  Settings set = 2;
+  Configurations configurations = 1;
+  Settings settings = 2;
 }

@@ -72,6 +72,9 @@ function createWindow() {
 
 function popUp(text, x, y) {
   let config;
+  file.get_config(data => {
+    config = data.configurations;
+  });
   framelessWin = new BrowserWindow({
     x: x,
     y: y,

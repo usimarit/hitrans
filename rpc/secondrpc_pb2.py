@@ -98,18 +98,18 @@ DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['PopData'] = _POPDATA
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
-  DESCRIPTOR = _EMPTY,
-  __module__ = 'secondrpc_pb2'
+Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
+  'DESCRIPTOR' : _EMPTY,
+  '__module__' : 'secondrpc_pb2'
   # @@protoc_insertion_point(class_scope:secondrpc.Empty)
-  ))
+  })
 _sym_db.RegisterMessage(Empty)
 
-PopData = _reflection.GeneratedProtocolMessageType('PopData', (_message.Message,), dict(
-  DESCRIPTOR = _POPDATA,
-  __module__ = 'secondrpc_pb2'
+PopData = _reflection.GeneratedProtocolMessageType('PopData', (_message.Message,), {
+  'DESCRIPTOR' : _POPDATA,
+  '__module__' : 'secondrpc_pb2'
   # @@protoc_insertion_point(class_scope:secondrpc.PopData)
-  ))
+  })
 _sym_db.RegisterMessage(PopData)
 
 

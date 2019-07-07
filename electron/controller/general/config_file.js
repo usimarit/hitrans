@@ -1,21 +1,21 @@
-const client = require('./rpc_client');
+const client = require("./rpc_client");
 
 const create_config_file = callback => {
-  client.CreateConfigFile((err, response) => {
+  client.CreateConfigFile(null, (err, response) => {
     if (err) {
       console.error(err);
     } else {
-      callback(response.message);
+      callback(response);
     }
   });
 };
 
 const get_config = callback => {
-  client.GetConfigFile((err, response) => {
+  client.GetConfigFile(null, (err, response) => {
     if (err) {
       console.error(err);
     } else {
-      callback(response.message);
+      callback(response);
     }
   });
 };
@@ -25,7 +25,7 @@ const write_config = (data, callback) => {
     if (err) {
       console.error(err);
     } else {
-      callback(response.message);
+      callback(response);
     }
   });
 };
