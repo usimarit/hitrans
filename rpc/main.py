@@ -1,7 +1,10 @@
-from concurrent import futures
-import time
-import logging
+# pylint: disable=missing-docstring, wrong-import-order
+import multiprocessing
+from client import client
+from server import serve
 
-import grpc
-
-class Hitrans()
+def main():
+    serv = multiprocessing.Process("Hitrans Server Process", target=serve)
+    clnt = multiprocessing.Process("Hitrans Client Process", target=client)
+    serv.start()
+    clnt.start()

@@ -11,9 +11,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "react-transition-group": "^4.1.1",
-    "x11": "^2.3.0",
-    "zerorpc": "^0.9.8"
+    "react-transition-group": "^4.1.1"
   },
   "description": "Highlight Translation",
   "main": "main.js",
