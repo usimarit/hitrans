@@ -1,7 +1,6 @@
 const makeRequest = require("./api");
 
 const translate = (q, config) => {
-  let format = config.format ? config.format : "text";
   let url =
     config.trans_url +
     config.version +
@@ -9,8 +8,7 @@ const translate = (q, config) => {
     q +
     "&target=" +
     config.target_lang +
-    "&format=" +
-    format +
+    "&format=text" +
     "&model=" +
     config.model +
     "&key=" +

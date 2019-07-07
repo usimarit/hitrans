@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package firstrpc;
+
+service FirstRpc {
+  rpc CreateConfigFile(Empty) returns (Empty) {}
+  rpc GetConfigFile(Empty) returns (ConfigData) {}
+  rpc WriteConfigFile(ConfigData) returns (Empty) {}
+}
+
+message Empty {}
+
+message Configurations {
+  string trans_url = 1;
+  string source_lang = 2;
+  string target_lang = 3;
+  string api_key = 4;
+  string model = 5;
+  string version = 6;
+}
+
+message TextSelection {
+  bool double_click = 1;
+  bool finished_selection = 2;
+}
+
+message Settings {
+  TextSelection text_selection = 1;
+  string shortcut = 2;
+}
+
+message ConfigData {
+  Configurations configurations = 1;
+  Settings settings = 2;
+}

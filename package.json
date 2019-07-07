@@ -3,17 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@grpc/proto-loader": "^0.5.1",
     "@material-ui/core": "^4.0.0-rc.0",
     "@material-ui/icons": "^4.1.0",
     "electron": "^5.0.3",
     "electron-is-dev": "^1.1.0",
+    "grpc": "^1.21.1",
+    "node-fetch": "^2.6.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "react-transition-group": "^4.1.1",
-    "x11": "^2.3.0",
-    "zerorpc": "^0.9.8"
+    "react-transition-group": "^4.1.1"
   },
   "description": "Highlight Translation",
   "main": "main.js",

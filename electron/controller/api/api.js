@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 const makeRequest = (url, options) => {
   const newUrl = url;
   console.log(newUrl);
