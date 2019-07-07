@@ -2,13 +2,10 @@
 
 import grpc
 from file import create_file, get_config, write_config
-import time
 
 from concurrent import futures
 import firstrpc_pb2_grpc
 import firstrpc_pb2
-
-_ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 
 class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
@@ -61,20 +58,18 @@ class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
         return firstrpc_pb2.Empty()
 
 
-def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    firstrpc_pb2_grpc.add_FirstRpcServicer_to_server(
-        HitransServicer(), server
-    )
-    server.add_insecure_port('[::]:1234')
-    print("Server started at port 1234")
-    server.start()
-    try:
-        while True:
-            time.sleep(_ONE_DAY_IN_SECONDS)
-    except KeyboardInterrupt:
-        server.stop(0)
+class Server:
+    def __init__(self):
+        self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        firstrpc_pb2_grpc.add_FirstRpcServicer_to_server(
+            HitransServicer(), self.server
+        )
+        self.server.add_insecure_port('[::]:1234')
 
+    def start(self):
+        print("Server started at port 1234")
+        self.server.start()
 
-if __name__ == "__main__":
-    serve()
+    def stop(self):
+        print("Server stopped at port 1234")
+        self.server.stop(0)
