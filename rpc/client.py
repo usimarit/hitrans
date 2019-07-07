@@ -6,21 +6,40 @@ from text_selection import get_selected_text
 import secondrpc_pb2
 import secondrpc_pb2_grpc
 
+from datetime import datetime
 
-def client():
-    def on_click(x, y, button, pressed):
+_ONE_DAY_IN_SECONDS = 60 * 60 * 24
+
+lasttime = datetime.now()
+
+
+class Client:
+    def __init__(self):
         channel = grpc.insecure_channel('localhost:1235')
-        stub = secondrpc_pb2_grpc.SecondRpcStub(channel)
-        if not pressed:
+        self.stub = secondrpc_pb2_grpc.SecondRpcStub(channel)
+
+    def popUp(self, text, x, y):
+        self.stub.PopUp(secondrpc_pb2.PopData(text=text, x=x, y=y))
+
+    def on_click(self, x, y, button, pressed):
+        global lasttime
+        if not pressed and button == mouse.Button.left:
+            now = datetime.now()
+            deltatime = now - lasttime
+            if deltatime.microseconds / 1000 >= 300:
+                lasttime = now
+                return
+            lasttime = now
             text = get_selected_text()
             if text == '':
                 return
             print(text)
-            stub.PopUp(secondrpc_pb2.PopData(text=text, x=x, y=y))
-    print("Client started to listen port 1235")
-    with mouse.Listener(on_click=on_click) as listener:
-        listener.join()
+            self.popUp(text=text, x=x, y=y)
 
+    def start(self):
+        print("Client started listening port 1235")
+        self.listener = mouse.Listener(on_click=self.on_click)
+        self.listener.start()
 
-if __name__ == '__main__':
-    client()
+    def stop(self):
+        self.listener.stop()
