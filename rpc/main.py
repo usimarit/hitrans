@@ -1,4 +1,4 @@
-# pylint: disable=missing-docstring, wrong-import-order
+# pylint: disable=missing-docstring, wrong-import-order, global-statement, invalid-name
 import time
 
 from datetime import datetime

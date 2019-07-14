@@ -4,17 +4,17 @@
   "private": true,
   "dependencies": {
     "@grpc/proto-loader": "^0.5.1",
-    "@material-ui/core": "^4.0.0-rc.0",
-    "@material-ui/icons": "^4.1.0",
-    "electron": "^5.0.3",
+    "@material-ui/core": "^4.2.0",
+    "@material-ui/icons": "^4.2.1",
+    "electron": "^5.0.6",
     "electron-is-dev": "^1.1.0",
-    "grpc": "^1.21.1",
+    "grpc": "^1.22.2",
     "node-fetch": "^2.6.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "react-transition-group": "^4.1.1"
+    "react-transition-group": "^4.2.1"
   },
   "description": "Highlight Translation",
   "main": "main.js",
@@ -44,9 +44,9 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^4.1.0",
-    "electron-builder": "^20.43.0",
+    "concurrently": "^4.1.1",
+    "electron-builder": "^20.44.4",
     "electron-rebuild": "^1.8.5",
-    "wait-on": "^3.2.0"
+    "wait-on": "^3.3.0"
   }
 }
