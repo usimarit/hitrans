@@ -17,7 +17,7 @@ class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
         create_config_file()
         return firstrpc_pb2.Empty()
 
-    def getconfigfile(self, request, context):
+    def GetConfigFile(self, request, context):
         data = get_config()
         conf = firstrpc_pb2.Configurations(
             **data['configurations']

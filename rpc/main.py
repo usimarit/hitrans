@@ -24,7 +24,7 @@ def on_click(x, y, button, pressed):
 
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
-lasttime = datetime.now()
+lasttime = datetime.min
 provider = EventProvider()
 listener = mouse.Listener(on_click=on_click)
 

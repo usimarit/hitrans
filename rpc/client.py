@@ -15,7 +15,7 @@ class Client:
         self.stub = secondrpc_pb2_grpc.SecondRpcStub(channel)
 
     def popUp(self, text, x, y):
-        self.stub.PopUp(secondrpc_pb2.PopData(text=text, x=x, y=y))
+        self.stub.PopUp.future(secondrpc_pb2.PopData(text=text, x=x, y=y))
 
     def process(self, event_code, context):
         if event_code == EventCode.DOUBLE_CLICK:
