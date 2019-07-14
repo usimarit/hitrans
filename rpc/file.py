@@ -1,60 +1,42 @@
 # pylint: disable=missing-docstring, wrong-import-order, line-too-long
-import os
-import sys
 import json
 
-FILE = '/config.json'
-
-DEFAULT_CONF = os.path.dirname(os.path.realpath(
-    __file__)) + '/../electron/controller/config/default.json'
-
-LINUX_CONFIG_PATH = '/home/' + os.environ['USER'] + '/.config/hitrans'
-WINDOWS_CONFIG_PATH = ''
-MACOS_CONFIG_PATH = ''
+from enum import Enum
+from os import path
+from config import (
+    DEFAULT_CONF,
+    CONFIG_FILE,
+)
 
 
-def get_default_data():
-    with open(DEFAULT_CONF) as default_conf:
-        data = json.load(default_conf)
-    return data
+class FileError(Enum):
+    FILE_EXIST = 0
+    FILE_NOT_FOUND = 1
+    FILE_IS_DIR = 2
 
 
-def get_path(plat):
-    return LINUX_CONFIG_PATH if plat == 'linux' else WINDOWS_CONFIG_PATH if plat == 'windows' else MACOS_CONFIG_PATH
+def validatePath(f):
+    if not path.exists(f):
+        return FileError.FILE_NOT_FOUND
+    if path.isdir(f):
+        return FileError.FILE_IS_DIR
+    if path.isfile(f):
+        return FileError.FILE_EXIST
 
 
-def check_file(path):
-    return os.path.isfile(path)
-
-
-def check_path(plat):
-    return os.path.exists(get_path(plat))
-
-
-def create_file():
-    plat = sys.platform
-    path = get_path(plat)
-    # if not check_path(plat):
-    #    os.makedirs(path)
-    if not check_file(path + FILE):
-        data = get_default_data()
-        path += FILE
-        with open(path, 'w') as json_config_file:
-            json.dump(data, json_config_file)
-            print(path)
+def create_config_file():
+    if validatePath(CONFIG_FILE) != FileError.FILE_NOT_FOUND:
+        return
+    write_config(DEFAULT_CONF)
 
 
 def get_config():
-    plat = sys.platform
-    path = get_path(plat)
-    with open(path + FILE, 'r') as json_config_file:
-        data = json.load(json_config_file)
-    return data
+    if validatePath(CONFIG_FILE) != FileError.FILE_EXIST:
+        return
+    file_config = json.load(open(CONFIG_FILE, 'r'))
+    current_config = {**DEFAULT_CONF, **file_config}
+    return current_config
 
 
 def write_config(data):
-    plat = sys.platform
-    path = get_path(plat)
-    with open(path + FILE, 'w') as json_config_file:
-        json.dump(data, json_config_file)
-        print(path + FILE)
+    json.dump(data, open(CONFIG_FILE, 'w'))
