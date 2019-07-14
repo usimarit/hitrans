@@ -1,31 +1,29 @@
 # pylint: disable=missing-docstring, wrong-import-order
 
 import grpc
-from file import create_file, get_config, write_config
+import firstrpc_pb2
+import firstrpc_pb2_grpc
 
 from concurrent import futures
-import firstrpc_pb2_grpc
-import firstrpc_pb2
+from file import (
+    create_config_file,
+    get_config,
+    write_config
+)
 
 
 class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
     def CreateConfigFile(self, request, context):
-        create_file()
+        create_config_file()
         return firstrpc_pb2.Empty()
 
-    def GetConfigFile(self, request, context):
+    def getconfigfile(self, request, context):
         data = get_config()
         conf = firstrpc_pb2.Configurations(
-            trans_url=data['configurations']['trans_url'],
-            source_lang=data['configurations']['source_lang'],
-            target_lang=data['configurations']['target_lang'],
-            api_key=data['configurations']['api_key'],
-            model=data['configurations']['model'],
-            version=data['configurations']['version']
+            **data['configurations']
         )
         text_sel = firstrpc_pb2.TextSelection(
-            double_click=data['settings']['text_selection']['double_click'],
-            finished_selection=data['settings']['text_selection']['finished_selection']
+            **data['settings']['text_selection']
         )
         sets = firstrpc_pb2.Settings(
             text_selection=text_sel,
