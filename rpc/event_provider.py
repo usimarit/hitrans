@@ -1,3 +1,5 @@
+# pylint:disable=missing-docstring
+
 from enum import Enum
 
 

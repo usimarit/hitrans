@@ -1,4 +1,4 @@
-# pylint: disable=missing-docstring, wrong-import-order, invalid-name
+# pylint: disable=missing-docstring, wrong-import-order, invalid-name, no-self-use
 import grpc
 import secondrpc_pb2
 import secondrpc_pb2_grpc
