@@ -20,6 +20,8 @@ class Client:
     def process(self, event_code, context):
         if event_code == EventCode.DOUBLE_CLICK:
             text = get_selected_text()
+            if text == "":
+                return
             x, y = context
             print("DOUBLE_CLICK at ({},{}) {}".format(x, y, text))
             self.popUp(text=text, x=x, y=y)

@@ -25,9 +25,12 @@ class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
         text_sel = firstrpc_pb2.TextSelection(
             **data['settings']['text_selection']
         )
+        shortcut = firstrpc_pb2.Shortcut(
+            **data['settings']['shortcut']
+        )
         sets = firstrpc_pb2.Settings(
             text_selection=text_sel,
-            shortcut=data['settings']['shortcuts']
+            shortcut=shortcut
         )
         return firstrpc_pb2.ConfigData(
             configurations=conf,
@@ -49,9 +52,12 @@ class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
                     'double_click': request.settings.text_selection.double_click,
                     'finished_selection': request.settings.text_selection.finished_selection
                 },
-                'shortcuts': request.settings.shortcut
-            }
-        })
+                'shortcut': {
+                    'alt': request.settings.shortcut.alt,
+                    'shift': request.settings.shortcut.shift,
+                    'ctrl': request.settings.shortcut.ctrl
+                }
+            }})
         write_config(data)
         return firstrpc_pb2.Empty()
 
