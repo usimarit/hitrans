@@ -1,4 +1,4 @@
-#pylint:disable=missing-docstring
+# pylint:disable=missing-docstring
 
 from appdirs import user_config_dir
 
@@ -23,6 +23,10 @@ DEFAULT_CONF = {
             'double_click': True,
             'finished_selection': True
         },
-        'shortcuts': ''
+        'shortcut': {
+            'alt': True,
+            'shift': False,
+            'ctrl': False
+        }
     }
 }

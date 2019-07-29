@@ -14,7 +14,7 @@ export default class GlobalContextProvider extends React.Component {
       target_lang: [],
       engine: [],
       version: [],
-      lookup_lang: {}
+      lookup_lang: {},
     };
   }
 
@@ -40,7 +40,7 @@ export default class GlobalContextProvider extends React.Component {
         target_lang: data.lang.slice(1, data.lang.length),
         engine: data.engine,
         lookup_lang: data.lookup_lang,
-        version: data.version
+        version: data.version,
       });
     });
   };
@@ -53,9 +53,17 @@ export default class GlobalContextProvider extends React.Component {
     ipcRenderer.removeAllListeners();
   };
 
-  change_state = (option, name, data) => {
+  change_config = (name, data) => {
     let _new_config = this.state.config;
-    _new_config[option][name] = data;
+    _new_config["configurations"][name] = data;
+    this.setState({ config: _new_config }, () => {
+      this.store_configurations();
+    });
+  };
+
+  change_settings = (option, name, data) => {
+    let _new_config = this.state.config;
+    _new_config["settings"][option][name] = data;
     this.setState({ config: _new_config }, () => {
       this.store_configurations();
     });
@@ -83,9 +91,9 @@ export default class GlobalContextProvider extends React.Component {
           get_configurations: this.get_configurations,
           get_settings: this.get_settings,
           store_configurations: this.store_configurations,
-          change_state: this.change_state
-        }}
-      >
+          change_config: this.change_config,
+          change_settings: this.change_settings,
+        }}>
         {this.props.children}
       </globalContext.Provider>
     );
