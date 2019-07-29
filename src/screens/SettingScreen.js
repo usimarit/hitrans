@@ -1,41 +1,23 @@
-import React from 'react';
-import ScreenWrapper from '../components/general/ScreenWrapper';
-import SettingItem from '../components/settings/item';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Button from '@material-ui/core/Button';
-import '../css/settings/settings.css';
-import { withGlobalContext } from '../components/context/global';
+import React from "react";
+import ScreenWrapper from "../components/general/ScreenWrapper";
+import SettingItem from "../components/settings/item";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import "../css/settings/settings.css";
+import { withGlobalContext } from "../components/context/global";
 
 class SettingScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      is_current_shortcut: false, // Load settings
-      current_shortcut: 'No value set',
-      is_pressing_keys: false,
-    };
+    this.state = {};
   }
   selectionChanged = name => e => {
-    this.props.global.change_state('settings', name, e.target.checked);
+    this.props.global.change_settings("text_selection", name, e.target.checked);
   };
-  checkExistingKeyComb = (key_comb, callback) => {
-    callback();
-  };
-  handleInputCombination = callback => {
-    this.checkExistingKeyComb([], callback);
-  };
-  changeShortcut = () => {
-    this.setState({
-      current_shortcut: 'Press key combinations',
-      is_pressing_keys: true,
-    });
-    // Handle input combinations
-    this.handleInputCombination(() => {
-      this.setState({ is_pressing_keys: false });
-    });
+  shortcutChanged = name => e => {
+    this.props.global.change_settings("shortcut", name, e.target.checked);
   };
   render() {
     return (
@@ -47,10 +29,11 @@ class SettingScreen extends React.Component {
                 control={
                   <Checkbox
                     color="primary"
-                    onChange={this.selectionChanged('double_click')}
+                    onChange={this.selectionChanged("double_click")}
                     checked={
                       this.props.global.config.settings
-                        ? this.props.global.config.settings.double_click
+                        ? this.props.global.config.settings.text_selection
+                            .double_click
                         : false
                     }
                   />
@@ -61,10 +44,11 @@ class SettingScreen extends React.Component {
                 control={
                   <Checkbox
                     color="primary"
-                    onChange={this.selectionChanged('finished_selection')}
+                    onChange={this.selectionChanged("finished_selection")}
                     checked={
                       this.props.global.config.settings
-                        ? this.props.global.config.settings.finished_selection
+                        ? this.props.global.config.settings.text_selection
+                            .finished_selection
                         : false
                     }
                   />
@@ -75,22 +59,61 @@ class SettingScreen extends React.Component {
           </FormControl>
         </SettingItem>
         <SettingItem title="Shortcuts">
-          <FormControlLabel
-            disabled
-            className="shortcut"
-            control={
-              <Button
-                variant="contained"
-                className="shortcut_but"
-                disabled={this.state.is_pressing_keys}
-                onClick={this.changeShortcut}
-                color={this.state.is_current_shortcut ? 'primary' : null}>
-                {this.state.current_shortcut}
-              </Button>
-            }
-            label="Click to change keyboard shortcut"
-            labelPlacement="start"
-          />
+          <p>
+            Current shortcut:{" "}
+            {this.props.global.config.settings.shortcut.alt ? "Alt" : ""}{" "}
+            {this.props.global.config.settings.shortcut.shift ? "Shift" : ""}{" "}
+            {this.props.global.config.settings.shortcut.ctrl ? "Ctrl" : ""}{" "}
+            {!this.props.global.config.settings.shortcut.alt &&
+            !this.props.global.config.settings.shortcut.shift &&
+            !this.props.global.config.settings.shortcut.ctrl
+              ? "None"
+              : " + b"}
+          </p>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  color="primary"
+                  onChange={this.shortcutChanged("alt")}
+                  checked={
+                    this.props.global.config.settings
+                      ? this.props.global.config.settings.shortcut.alt
+                      : false
+                  }
+                />
+              }
+              label="Alt"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  color="primary"
+                  onChange={this.shortcutChanged("shift")}
+                  checked={
+                    this.props.global.config.settings
+                      ? this.props.global.config.settings.shortcut.shift
+                      : false
+                  }
+                />
+              }
+              label="Shift"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  color="primary"
+                  onChange={this.shortcutChanged("ctrl")}
+                  checked={
+                    this.props.global.config.settings
+                      ? this.props.global.config.settings.shortcut.ctrl
+                      : false
+                  }
+                />
+              }
+              label="Ctrl"
+            />
+          </FormGroup>
         </SettingItem>
       </ScreenWrapper>
     );

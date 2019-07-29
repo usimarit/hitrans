@@ -16,15 +16,14 @@ def on_click(x, y, button, pressed):
         return
     now = datetime.now()
     deltatime = now - lasttime
-    if deltatime.microseconds / 1000 >= 300:
-        lasttime = now
-        return
     lasttime = now
+    if deltatime.microseconds >= 300000:
+        return
     provider.notify(EventCode.DOUBLE_CLICK, (x, y))
 
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
-lasttime = datetime.min
+lasttime = datetime.now()
 provider = EventProvider()
 listener = mouse.Listener(on_click=on_click)
 

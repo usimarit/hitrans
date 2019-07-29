@@ -11,20 +11,16 @@ import { withGlobalContext } from "../components/context/global";
 
 class ConfigScreen extends React.Component {
   changeLang = e => {
-    this.props.global.change_state(
-      "configurations",
-      e.target.name,
-      e.target.value
-    );
+    this.props.global.change_config(e.target.name, e.target.value);
   };
   changeEngine = e => {
-    this.props.global.change_state("configurations", "model", e.target.value);
+    this.props.global.change_config("model", e.target.value);
   };
   changeVersion = e => {
-    this.props.global.change_state("configurations", "version", e.target.value);
+    this.props.global.change_config("version", e.target.value);
   };
   changeKey = e => {
-    this.props.global.change_state("configurations", "api_key", e.target.value);
+    this.props.global.change_config("api_key", e.target.value);
   };
   render() {
     return (
@@ -43,9 +39,8 @@ class ConfigScreen extends React.Component {
                 onChange={this.changeLang}
                 inputProps={{
                   name: "source_lang",
-                  id: "source_lang"
-                }}
-              >
+                  id: "source_lang",
+                }}>
                 {this.props.global.source_lang.map((item, index) => {
                   return (
                     <MenuItem key={index} value={item.value}>
@@ -66,9 +61,8 @@ class ConfigScreen extends React.Component {
                 onChange={this.changeLang}
                 inputProps={{
                   name: "target_lang",
-                  id: "target_lang"
-                }}
-              >
+                  id: "target_lang",
+                }}>
                 {this.props.global.target_lang.map((item, index) => {
                   return (
                     <MenuItem key={index} value={item.value}>
@@ -100,8 +94,7 @@ class ConfigScreen extends React.Component {
                 : this.props.global.engine[0].value
             }
             onChange={this.changeEngine}
-            displayEmpty
-          >
+            displayEmpty>
             {this.props.global.engine.map((item, index) => {
               return (
                 <MenuItem key={index} value={item.value}>
@@ -119,8 +112,7 @@ class ConfigScreen extends React.Component {
                 : this.props.global.version[1].value
             }
             onChange={this.changeVersion}
-            displayEmpty
-          >
+            displayEmpty>
             {this.props.global.version.map((item, index) => {
               return (
                 <MenuItem key={index} value={item.value}>
