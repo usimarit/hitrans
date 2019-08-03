@@ -13,8 +13,8 @@ pip install grpc grpc-tools
 ### Generate grpc python code
 
 ```bash
-# At the root directory "hitrans"
-python3 -m grpc_tools.protoc -I../hitrans --python_out=. --grpc_python_out=. ../hitrans/rpc/protos/*.proto
+# At the root directory of python grpc (e.g "hitrans/rpc")
+python3 -m grpc_tools.protoc -I../rpc --python_out=. --grpc_python_out=. ../rpc/protos/*.proto
 ```
 
 ### Run
@@ -49,11 +49,11 @@ React is the main frontend of the application.
 
 #### PopUp Renderer
 
-PopUp is a frameless window implemented in pure *html* codes.
+PopUp is a frameless window implemented in pure _html_ codes.
 
 #### Node gRPC Renderer
 
-This process holds an important role in the application. The **gRPC Second Services** will be running in this process as **Node gRPC Server** to handle *PopUp* request from **Python gRPC Client** where the **gRPC First Services** will be the **Node gRPC Client** that sends requests to **Python gRPC Server**.
+This process holds an important role in the application. The **gRPC Second Services** will be running in this process as **Node gRPC Server** to handle _PopUp_ request from **Python gRPC Client** where the **gRPC First Services** will be the **Node gRPC Client** that sends requests to **Python gRPC Server**.
 
 ### gRPC
 
@@ -84,4 +84,3 @@ This process has following services:
 2. Detect mouse clicks, double click.
 3. Get primary selection text of the OS.
 4. Detect keyboard shortcuts.
-
