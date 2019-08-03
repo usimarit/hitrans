@@ -1,6 +1,7 @@
 # pylint:disable=missing-docstring
 
 from enum import Enum
+from file.file import get_config
 
 
 class EventCode(Enum):
@@ -11,21 +12,35 @@ class EventCode(Enum):
 
 class EventProvider:
     def __init__(self):
-        self.subscribers = {
-            # event_code: [sub]
-        }
+        self.events = set()
+        self.update_events()
+
+    def attach(self, sub):
+        self.subscriber = sub
 
     def notify(self, event_code, context):
         """
         @param: event, event code enum
         """
-        for sub in self.subscribers[event_code]:
-            sub.process(event_code, context)
+        if event_code in self.events:
+            self.subscriber.process(context)
 
-    def subsribe(self, event_code, sub):
-        self.subscribers.setdefault(event_code, []).append(sub)
+    def subscribe(self, event_code):
+        self.events.add(event_code)
 
-    def unsubscribe(self, event_code, sub):
-        self.subscribers[event_code].remove(sub)
+    def update_events(self):
+        config = get_config()
+        self.events.clear()
+        # Shortcut event will always be active, only triggered when a key
+        # combination is match
+        self.subscribe(EventCode.SHORTCUT)
+        try:
+            if config['settings']['text_selection']['double_click']:
+                self.subscribe(EventCode.DOUBLE_CLICK)
+            if config['settings']['text_selection']['finished_selection']:
+                self.subscribe(EventCode.DRAG_AND_DROP)
+        except TypeError:
+            pass
+
 
 provider = EventProvider()

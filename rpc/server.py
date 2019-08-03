@@ -11,6 +11,7 @@ from file.file import (
     write_config
 )
 from keyboard.shortcut import keyboard_shortcut
+from handler.event_provider import provider
 
 
 class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
@@ -61,6 +62,7 @@ class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
             }})
         write_config(data)
         keyboard_shortcut.update_key_combination()
+        provider.update_events()
         return firstrpc_pb2.Empty()
 
 

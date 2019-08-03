@@ -19,7 +19,8 @@ def main():
     shortcut_listener.start()
     drag_and_drop_listener.start()
 
-    provider.subsribe(EventCode.DOUBLE_CLICK, c)
+    provider.attach(c)
+
     try:
         while True:
             time.sleep(100)
@@ -29,7 +30,6 @@ def main():
         double_click_listener.stop()
         shortcut_listener.stop()
         drag_and_drop_listener.stop()
-        provider.unsubscribe(EventCode.DOUBLE_CLICK, c)
 
 
 if __name__ == "__main__":

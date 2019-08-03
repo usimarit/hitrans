@@ -1,5 +1,5 @@
 # pylint: disable=missing-docstring
-from pynput import keyboard
+from pynput import keyboard, mouse
 from file.file import get_config
 from handler.event_provider import provider, EventCode
 
@@ -45,8 +45,8 @@ def on_shortcut_press(key):
     if key in keyboard_shortcut.combination:
         keyboard_shortcut.add_current_active_key(key)
         if all(k in keyboard_shortcut.current for k in keyboard_shortcut.combination):
-            print("All modifiers active!")
-            # provider.notify(EventCode.SHORTCUT, (x, y))
+            x, y = mouse.Controller().position
+            provider.notify(EventCode.SHORTCUT, (x, y))
 
 
 def on_shortcut_release(key):
