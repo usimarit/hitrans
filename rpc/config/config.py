@@ -5,6 +5,7 @@ from appdirs import user_config_dir
 HOST = 'tcp://0.0.0.0:'
 SVR_ADDR = HOST + '1234'
 CLT_ADDR = HOST + '1235'
+SHORTCUT = 'b'
 
 APPNAME = 'hitrans'
 CONFIG_PATH = user_config_dir(APPNAME)

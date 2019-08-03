@@ -1,15 +1,17 @@
 # pylint: disable=missing-docstring, wrong-import-order
 
 import grpc
-import firstrpc_pb2
-import firstrpc_pb2_grpc
+import protos.firstrpc_pb2 as firstrpc_pb2
+import protos.firstrpc_pb2_grpc as firstrpc_pb2_grpc
 
 from concurrent import futures
-from file import (
+from file.file import (
     create_config_file,
     get_config,
     write_config
 )
+from keyboard.shortcut import keyboard_shortcut
+from handler.event_provider import provider
 
 
 class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
@@ -59,6 +61,8 @@ class HitransServicer(firstrpc_pb2_grpc.FirstRpcServicer):
                 }
             }})
         write_config(data)
+        keyboard_shortcut.update_key_combination()
+        provider.update_events()
         return firstrpc_pb2.Empty()
 
 

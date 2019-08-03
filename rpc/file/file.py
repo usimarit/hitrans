@@ -3,13 +3,14 @@ import json
 
 from enum import Enum
 from os import path
-from config import (
+from config.config import (
     DEFAULT_CONF,
     CONFIG_FILE,
 )
 
 
 class FileError(Enum):
+    DEFAULT = -1
     FILE_EXIST = 0
     FILE_NOT_FOUND = 1
     FILE_IS_DIR = 2
@@ -22,6 +23,7 @@ def validatePath(f):
         return FileError.FILE_IS_DIR
     if path.isfile(f):
         return FileError.FILE_EXIST
+    return FileError.DEFAULT
 
 
 def create_config_file():
@@ -32,7 +34,7 @@ def create_config_file():
 
 def get_config():
     if validatePath(CONFIG_FILE) != FileError.FILE_EXIST:
-        return
+        return None
     file_config = json.load(open(CONFIG_FILE, 'r'))
     current_config = {**DEFAULT_CONF, **file_config}
     return current_config
