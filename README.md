@@ -10,6 +10,13 @@ npm install
 pip install grpc grpc-tools
 ```
 
+### Generate grpc python code
+
+```bash
+# At the root directory "hitrans"
+python3 -m grpc_tools.protoc -I../hitrans --python_out=. --grpc_python_out=. ../hitrans/rpc/protos/*.proto
+```
+
 ### Run
 
 Open a terminal and type:
