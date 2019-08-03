@@ -5,6 +5,8 @@ from enum import Enum
 
 class EventCode(Enum):
     DOUBLE_CLICK = 1
+    DRAG_AND_DROP = 2
+    SHORTCUT = 3
 
 
 class EventProvider:
@@ -25,3 +27,5 @@ class EventProvider:
 
     def unsubscribe(self, event_code, sub):
         self.subscribers[event_code].remove(sub)
+
+provider = EventProvider()
