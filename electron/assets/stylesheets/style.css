@@ -1,25 +1,36 @@
 html {
-  border: 1px solid black;
+  border: 2px solid #375e97;
 }
 
 html,
 body {
   font-family: "Roboto";
-  word-wrap: break-word;
   background-color: whitesmoke;
+  overflow: hidden;
+  width: fit-content;
+  height: fit-content;
+}
+
+body {
+  margin: 0;
 }
 
 body .container_popup {
   margin: 0px;
   padding: 0;
+  height: min-content;
   max-height: 720px;
-  overflow: auto;
+  width: max-content;
+  max-width: 450px;
+  overflow-y: auto;
+  overflow-wrap: break-word;
 }
 body .container_popup p {
   margin: 0px;
   padding: 10px;
   padding-top: 0px;
   font-size: 14pt;
+  color: "#111111";
 }
 
 body .container_popup h5 {

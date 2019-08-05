@@ -19,6 +19,8 @@ class Client:
         if text == "":
             return
         x, y = context
+        x = x + 5
+        y = y + 5
         print("Popup at ({},{}) {}".format(x, y, text))
         self.popUp(text=text, x=x, y=y)
 
