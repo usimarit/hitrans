@@ -7,12 +7,10 @@ const makeRequest = (url, options) => {
     Accept: "application/json",
     "Content-Type": "application/json"
   };
-  console.log(options);
   return fetch(newUrl, options)
     .then(response => {
       // DELETE and 204 do not return data by default
       // Using json will report error
-      console.log(response);
       if (/*options.method === "DELETE" || */ response.status === 204) {
         return response.text();
       } else if (options.method === "HEAD") {

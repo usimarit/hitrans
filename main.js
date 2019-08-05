@@ -71,46 +71,78 @@ function createWindow() {
 }
 
 function popUp(text, x, y) {
-  let config;
-  file.get_config(data => {
-    config = data.configurations;
-  });
-  framelessWin = new BrowserWindow({
-    x: x,
-    y: y,
-    width: 400,
-    height: 180,
-    movable: false,
-    frame: false,
-    alwaysOnTop: false,
-    resizable: false,
-    useContentSize: true,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  });
-
-  framelessWin.loadFile(popup_html);
-  framelessWin.webContents.once("did-finish-load", () => {
-    translate(text, config).then(res => {
-      framelessWin.webContents.send("async-show-trans", {
-        target_lang: google_translation.lookup_lang[config.target_lang],
-        translated_text: res,
-        source_lang: google_translation.lookup_lang[config.source_lang],
-        text: text
-      });
-    });
-  });
-  framelessWin.setMenuBarVisibility(false);
-  framelessWin.on("blur", () => {
+  if (framelessWin) {
     try {
-      framelessWin.close();
+      framelessWin.destroy();
     } catch (e) {
       console.error(e);
     }
     framelessWin = null;
+  }
+  let config;
+  return file.get_config(data => {
+    config = data.configurations;
+    if (!config.api_key) {
+      // Do nothing because api key is needed to call google api
+      return;
+    } else {
+      framelessWin = new BrowserWindow({
+        // Pop up at mouse position
+        x: x,
+        y: y,
+        width: 400,
+        height: 200,
+        movable: false,
+        useContentSize: true,
+        // Remove all title bar and borders
+        frame: false,
+        show: false,
+        alwaysOnTop: true,
+        hasShadow: true,
+        resizable: true,
+        maximizable: false,
+        minimizable: false,
+        // Enable node so that ipcRenderer can work in popup_html
+        webPreferences: {
+          nodeIntegration: true
+        },
+        // Prevent create a seperate window in task manager (this pop up window bounds to the main thread)
+        parent: MainWindow
+      });
+
+      framelessWin.loadFile(popup_html);
+      framelessWin.webContents.once("did-finish-load", () => {
+        translate(text, config).then(res => {
+          framelessWin.webContents.send("async-show-trans", {
+            target_lang: google_translation.lookup_lang[config.target_lang],
+            translated_text: res,
+            source_lang: google_translation.lookup_lang[config.source_lang],
+            text: text
+          });
+        });
+      });
+      framelessWin.setMenuBarVisibility(false);
+      framelessWin.on("unresponsive", () => {
+        try {
+          framelessWin.destroy();
+        } catch (e) {
+          console.error(e);
+        }
+        framelessWin = null;
+      });
+      framelessWin.on("blur", () => {
+        try {
+          framelessWin.destroy();
+        } catch (e) {
+          console.error(e);
+        }
+        framelessWin = null;
+      });
+      framelessWin.once("ready-to-show", () => {
+        framelessWin.show();
+      });
+    }
   });
-  framelessWin.show();
 }
 
 function createServer() {
@@ -172,6 +204,11 @@ app.on("ready", () => {
         lookup_lang: google_translation.lookup_lang
       })
     );
+  });
+
+  ipcMain.on("async-show-trans-reply", (event, arg) => {
+    console.log(arg);
+    framelessWin.setSize(400, arg);
   });
 });
 

@@ -1,22 +1,28 @@
+html {
+  border: 1px solid black;
+}
+
 html,
 body {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   word-wrap: break-word;
   background-color: whitesmoke;
 }
 
-.container_popup {
+body .container_popup {
   margin: 0px;
   padding: 0;
+  max-height: 720px;
+  overflow: auto;
 }
-.container_popup p {
+body .container_popup p {
   margin: 0px;
   padding: 10px;
   padding-top: 0px;
-  font-size: 16pt;
+  font-size: 14pt;
 }
 
-.container_popup h5 {
+body .container_popup h5 {
   margin: 0;
   padding: 10px;
   padding-bottom: 5px;
@@ -24,6 +30,6 @@ body {
   color: grey;
 }
 
-.container_popup .popup_detail {
+body .container_popup .popup_detail {
   margin-bottom: 10px;
 }

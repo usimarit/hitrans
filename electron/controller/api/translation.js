@@ -1,6 +1,12 @@
 const makeRequest = require("./api");
 
+const preprocess_text = text => {
+  return encodeURIComponent(text);
+};
+
 const translate = (q, config) => {
+  q = preprocess_text(q);
+  console.log(q);
   let url =
     config.trans_url +
     config.version +
