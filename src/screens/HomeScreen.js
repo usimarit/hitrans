@@ -30,7 +30,7 @@ class HomeScreen extends React.Component {
             will be stored locally, so your key will be safe.
           </p>
           <p>Settings - stores application's config.</p>
-          <Typography variant="h4" gutterBottom className="title">
+          {/* <Typography variant="h4" gutterBottom className="title">
             Status
           </Typography>
           <p>
@@ -87,7 +87,7 @@ class HomeScreen extends React.Component {
               }
               label="Google Translate API Version"
             />
-          </FormGroup>
+          </FormGroup> */}
         </div>
       </ScreenWrapper>
     );

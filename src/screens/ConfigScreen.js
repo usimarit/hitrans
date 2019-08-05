@@ -76,7 +76,7 @@ class ConfigScreen extends React.Component {
         </SettingItem>
         <SettingItem title="Google API Key">
           <TextField
-            placeholder="Enter your key here"
+            placeholder="Enter your Google Api Key here"
             fullWidth
             onChange={this.changeKey}
             value={

@@ -1,22 +1,39 @@
-html,
-body {
-  font-family: 'Roboto';
-  word-wrap: break-word;
-  background-color: whitesmoke;
+html {
+  border: 2px solid #375e97;
 }
 
-.container_popup {
+html,
+body {
+  font-family: "Roboto";
+  background-color: whitesmoke;
+  overflow: hidden;
+  width: fit-content;
+  height: fit-content;
+}
+
+body {
+  margin: 0;
+}
+
+body .container_popup {
   margin: 0px;
   padding: 0;
+  height: min-content;
+  max-height: 720px;
+  width: max-content;
+  max-width: 450px;
+  overflow-y: auto;
+  overflow-wrap: break-word;
 }
-.container_popup p {
+body .container_popup p {
   margin: 0px;
   padding: 10px;
   padding-top: 0px;
-  font-size: 16pt;
+  font-size: 14pt;
+  color: "#111111";
 }
 
-.container_popup h5 {
+body .container_popup h5 {
   margin: 0;
   padding: 10px;
   padding-bottom: 5px;
@@ -24,6 +41,6 @@ body {
   color: grey;
 }
 
-.container_popup .popup_detail {
+body .container_popup .popup_detail {
   margin-bottom: 10px;
 }

@@ -15,13 +15,13 @@ DEFAULT_CONF = {
         'trans_url': 'https://translation.googleapis.com/language/translate/',
         'source_lang': 'auto',
         'target_lang': 'en',
-        'api_key': 'This is Google API Key',
+        'api_key': '',
         'model': 'nmt',
         'version': 'v2'
     },
     'settings': {
         'text_selection': {
-            'double_click': True,
+            'double_click': False,
             'finished_selection': True
         },
         'shortcut': {

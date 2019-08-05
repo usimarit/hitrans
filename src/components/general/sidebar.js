@@ -76,7 +76,7 @@ class Sidebar extends React.Component {
       <div className="sidebar">
         <div className="title">
           <Typography variant="h3" gutterBottom>
-            Hello
+            Hitrans
           </Typography>
         </div>
         <div className="button-list">
