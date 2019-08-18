@@ -1,21 +1,41 @@
 const ipcRenderer = require("electron").ipcRenderer;
-var translated_text = document.getElementById("translated_text");
-var target_lang = document.getElementById("target_lang");
-var source_lang = document.getElementById("source_lang");
-var text = document.getElementById("text");
-ipcRenderer.once("async-show-trans", (event, arg) => {
+var body = document.body;
+function changeElement(arg) {
   // Display the content
-  target_lang.innerHTML = arg.target_lang;
-  translated_text.innerHTML = arg.translated_text;
-  source_lang.innerHTML = arg.source_lang;
-  text.innerHTML = arg.text;
-  // Send back the whole document height
-  // for ipcMain to resize the pop up "framelessWin"
-  ipcRenderer.send(
-    "async-show-trans-reply",
+  body.innerHTML = `<div class="popup_detail"><h5 id="source_lang">${
+    arg.source_lang
+  }</h5><p id="text">${
+    arg.text
+  }</p></div><div class="popup_detail"><h5 id="target_lang">${
+    arg.target_lang
+  }</h5><p id="translated_text">${arg.translated_text}</p></div>`;
+}
+function showError(e) {
+  body.innerHTML = `<p>${e}</p>`;
+}
+function showLoading() {
+  body.innerHTML = `<img src="../images/spinner.gif" height="28" width="28"/>`;
+}
+function sendSize(sender, ev) {
+  let ele = document.documentElement;
+  sender.send(
+    ev,
     JSON.stringify({
-      height: document.documentElement.scrollHeight,
-      width: document.documentElement.scrollWidth,
-    }),
+      height: ele.offsetHeight,
+      width: ele.offsetWidth
+    })
   );
+}
+ipcRenderer.on("async-show-trans", (event, arg) => {
+  // Send back the whole document height
+  changeElement(arg);
+  // for ipcMain to resize the pop up "framelessWin"
+  sendSize(event.sender, "async-show-trans-reply");
+});
+ipcRenderer.on("async-show-trans-error", (event, arg) => {
+  showError(arg);
+});
+ipcRenderer.on("async-show-loading", (event, arg) => {
+  showLoading();
+  sendSize(event.sender, "async-show-loading-reply");
 });

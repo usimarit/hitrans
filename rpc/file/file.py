@@ -2,10 +2,11 @@
 import json
 
 from enum import Enum
-from os import path
+from os import path, makedirs
 from config.config import (
     DEFAULT_CONF,
     CONFIG_FILE,
+    CONFIG_PATH
 )
 
 
@@ -29,6 +30,10 @@ def validatePath(f):
 def create_config_file():
     if validatePath(CONFIG_FILE) != FileError.FILE_NOT_FOUND:
         return
+    try:
+        makedirs(CONFIG_PATH)
+    except OSError:
+        pass
     write_config(DEFAULT_CONF)
 
 
@@ -41,4 +46,4 @@ def get_config():
 
 
 def write_config(data):
-    json.dump(data, open(CONFIG_FILE, 'w'))
+    json.dump(data, open(CONFIG_FILE, 'w+'))
