@@ -60,7 +60,7 @@ class SettingScreen extends React.Component {
         </SettingItem>
         <SettingItem title="Shortcuts">
           <p>
-            Current shortcut:{" "}
+            {"Current shortcut: "}
             {this.props.global.config.settings.shortcut.alt ? "Alt" : ""}{" "}
             {this.props.global.config.settings.shortcut.shift ? "Shift" : ""}{" "}
             {this.props.global.config.settings.shortcut.ctrl ? "Ctrl" : ""}{" "}

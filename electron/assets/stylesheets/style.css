@@ -1,46 +1,54 @@
 html {
-  border: 2px solid #375e97;
+  display: block;
+  overflow: hidden;
+  height: fit-content;
+  width: fit-content;
 }
 
-html,
 body {
   font-family: "Roboto";
   background-color: whitesmoke;
-  overflow: hidden;
-  width: fit-content;
-  height: fit-content;
-}
-
-body {
-  margin: 0;
-}
-
-body .container_popup {
-  margin: 0px;
   padding: 0;
-  height: min-content;
+  margin: 0;
+  transition: 100ms all ease-in-out;
+  border: 1px solid #375e97;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  overflow: auto;
+  box-sizing: border-box;
+  height: fit-content;
+  width: fit-content;
   max-height: 720px;
-  width: max-content;
-  max-width: 450px;
-  overflow-y: auto;
-  overflow-wrap: break-word;
-}
-body .container_popup p {
-  margin: 0px;
-  padding: 10px;
-  padding-top: 0px;
-  font-size: 14pt;
-  color: "#111111";
 }
 
-body .container_popup h5 {
+body .popup_detail p {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: 14pt;
+  color: black;
+  max-width: 450px;
+  word-wrap: break-word;
+}
+
+body .popup_detail h5 {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: grey;
+  word-wrap: none;
+}
+
+body .popup_detail {
   margin: 0;
   padding: 10px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  color: grey;
-}
-
-body .container_popup .popup_detail {
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  height: min-content;
+  width: max-content;
+  box-sizing: border-box;
 }

@@ -32,6 +32,7 @@ const translate = (q, config) => {
     })
     .catch(e => {
       console.error(e);
+      return "Something went wrong, please check your internet connection and api key.";
     });
 };
 
