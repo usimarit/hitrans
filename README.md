@@ -1,5 +1,13 @@
 # Highlighted Text Translation (Hitrans)
 
+## Preview
+
+![](public/preview/preview_1.png)
+
+![](public/preview/preview_2.png)
+
+![](public/preview/preview_3.png)
+
 ## Setup
 
 ### Install
