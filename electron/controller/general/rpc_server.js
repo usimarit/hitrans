@@ -29,7 +29,7 @@ var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   longs: String,
   enums: String,
   defaults: true,
-  oneofs: true
+  oneofs: true,
 });
 var server_proto = grpc.loadPackageDefinition(packageDefinition).secondrpc;
 
@@ -39,8 +39,8 @@ function PopUp(call) {
     JSON.stringify({
       text: call.request.text,
       x: call.request.x,
-      y: call.request.y
-    })
+      y: call.request.y,
+    }),
   );
   return {};
 }

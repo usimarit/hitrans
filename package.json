@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.2.1",
     "electron": "^6.0.1",
     "electron-is-dev": "^1.1.0",
+    "electron-log": "^3.0.7",
     "grpc": "^1.22.2",
     "node-fetch": "^2.6.0",
     "react": "^16.8.6",
